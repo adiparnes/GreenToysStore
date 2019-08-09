@@ -206,3 +206,4 @@ C:\Users\Owner\Desktop\applications\GreenToys\bin\System.Security.Cryptography.E
 C:\Users\Owner\Desktop\applications\GreenToys\bin\System.Security.Cryptography.Primitives.dll
 C:\Users\Owner\Desktop\applications\GreenToys\bin\System.Security.Cryptography.X509Certificates.dll
 C:\Users\Owner\Desktop\applications\GreenToys\bin\Autofac.xml
+C:\Users\Owner\Desktop\applications\GreenToys\obj\Debug\GreenToys.Migrations.addtoyrentalmodel.resources

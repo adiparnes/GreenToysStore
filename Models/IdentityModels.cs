@@ -32,6 +32,8 @@ namespace GreenToys.Models
         public DbSet<Toy> Toys { get; set; }
         public DbSet<TypeOfToy> ToysType { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
+        public DbSet<ToyRent> ToyRental { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
