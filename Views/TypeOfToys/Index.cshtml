@@ -1,0 +1,47 @@
+﻿@model IEnumerable<GreenToys.Models.TypeOfToy>
+@using GreenToys.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Our Type of toys</h2>
+
+<p>
+
+    @*<h4>to create a new toy:&nbsp;</h4>
+        @Html.ActionLink("click here", "Create")*@
+
+
+    <!--partial create button-->
+    @Html.Partial("_CreateButtonPartial")
+    <br />
+    <br />
+
+</p>
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        <th>
+            @Html.DisplayNameFor(m => m.Name)
+        </th>
+        <th></th>
+        <th></th><!--to extend the line above the three buttons (edit,detail...)-->
+    </tr>
+    <!--we want to run on every item in our model and desplay all the typeoftoy names here-->
+    @foreach (var item in Model) 
+    {
+        <tr>
+            <td><!--this DisplayFor will display the actual value-->
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.Partial("_EditDetailsDeleteButtonPartial",new IndividualButtonPartial {TypeOfToyID= item.TypeOfToyID})
+            </td>
+        </tr>
+    }
+
+</table>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = item.TypeOfToyID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.TypeOfToyID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.TypeOfToyID })*@

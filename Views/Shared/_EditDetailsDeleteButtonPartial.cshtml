@@ -1,0 +1,48 @@
+﻿@model GreenToys.Models.IndividualButtonPartial
+@using GreenToys.Models
+
+<td style="width:400px;">
+    <div class="btn-group" role="group">
+        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+   {
+       Action = "Edit",
+       ButtonType = "btn-primary",
+       Glyph = "pencil",
+       Text = "Edit",// Edit button with text or without?
+       TypeOfToyID = Model.TypeOfToyID,
+       ToyID = Model.ToyID,
+       MembershipTypeID = Model.MembershipTypeID,
+       UserID=Model.UserID,
+       CustomerID = Model.CustomerID
+
+   })
+
+        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+   {
+       Action = "Details",
+       ButtonType = "btn-success",
+       Glyph = "list",
+       Text = "Details",// Details button with text or without?
+       TypeOfToyID = Model.TypeOfToyID,
+       ToyID = Model.ToyID,
+       MembershipTypeID = Model.MembershipTypeID,
+       UserID = Model.UserID,
+       CustomerID = Model.CustomerID
+
+   })
+
+        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+   {
+       Action = "Delete",
+       ButtonType = "btn-danger",
+       Glyph = "trash",
+       Text = "Delete", // Delete button with text or without?
+       TypeOfToyID = Model.TypeOfToyID,
+       ToyID = Model.ToyID,
+       MembershipTypeID = Model.MembershipTypeID,
+       UserID = Model.UserID,
+       CustomerID = Model.CustomerID
+
+   })
+    </div>
+</td>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<GreenToys.Models.Toy>
+@using GreenToys.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Our toys</h3>
+<br />
+<p>
+    <!--my button-->
+    @Html.Partial("_CreateButtonPartial")
+
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfToy.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            <!--toput in the details only?-->
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avaibility)
+        </th>
+
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfToy.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avaibility)
+            </td>
+            <td>
+                @Html.Partial("_EditDetailsDeleteButtonPartial", new IndividualButtonPartial
+               {
+                   ToyID = item.ToyID
+               })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!--things that in not sure i want in the head table-->
+@*<th>
+        @Html.DisplayNameFor(model => model.ForAge)
+    </th>*@
+
+@*<th>
+        @Html.DisplayNameFor(model => model.YearOfManufactire)
+    </th>*@
+
+@*<td>
+        @Html.DisplayFor(modelItem => item.YearOfManufactire)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ForAge)
+    </td>*@
+
+@*@Html.ActionLink("Edit", "Edit", new { id = item.ToyID }) |
+    @Html.ActionLink("Details", "Details", new { id = item.ToyID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.ToyID })*@

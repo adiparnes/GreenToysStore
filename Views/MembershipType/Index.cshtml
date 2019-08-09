@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GreenToys.Models.MembershipType>
+@using GreenToys.Models
+@{
+    ViewBag.Title = "Index";
+}
+<h3>Membership types</h3>
+<br/>
+<p>
+    @Html.Partial("_CreateButtonPartial")
+</p>
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        <th>
+            @Html.DisplayNameFor(model => model.MembershipName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SignUp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChargeRateForOneMonth)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MembershipName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SignUp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChargeRateForOneMonth)
+        </td>
+        <td>
+            @Html.Partial("_EditDetailsDeleteButtonPartial",new IndividualButtonPartial {
+           MembershipTypeID=item.MembershipTypeID
+       })
+        </td>
+    </tr>
+}
+
+</table>

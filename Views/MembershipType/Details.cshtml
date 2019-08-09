@@ -1,0 +1,52 @@
+﻿@model GreenToys.Models.MembershipType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Membership Details</h3>
+
+<div>
+    <hr />
+
+    <fieldset disabled>
+        <div class="form-border">
+            <div class="row" style="padding-bottom:5px;padding-top:5px;">
+                <div class="col-sm-2">
+                    @Html.LabelFor(model => model.MembershipName, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.MembershipName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom:5px;padding-top:5px;">
+                <div class="col-sm-2">
+                    @Html.LabelFor(model => model.SignUp, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.SignUp, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom:5px;padding-top:5px;">
+                <div class="col-sm-2">
+                    @Html.LabelFor(model => model.ChargeRateForOneMonth, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(model => model.ChargeRateForOneMonth, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+        </div>
+    </fieldset>
+    <br />
+
+
+
+    <div class="form-actions no-color">
+       @Html.Partial("_EditButtonPartial",Model.MembershipTypeID)
+        @Html.Partial("_BackToListButtonPartial")
+    </div>
+</div>

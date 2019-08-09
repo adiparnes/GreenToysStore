@@ -1,0 +1,93 @@
+﻿@model GreenToys.ViewModel.ToyViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3>Create a new toy</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h5>please enter all the details about the toy</h5>
+        <hr />
+        <div class="form-border">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.ForAge, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Toy.ForAge, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Toy.ForAge, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.NameOfToy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Toy.NameOfToy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Toy.NameOfToy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.ToyDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Toy.ToyDescription, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.TextAreaFor(model => model.Toy.ToyDescription, htmlAttributes: new { @class = "form-control", style = "height:250px;" })
+                    @Html.ValidationMessageFor(model => model.Toy.ToyDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Toy.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Toy.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.TypeOfToyID, "TypeOfToyID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Toy.TypeOfToyID, new SelectList(Model.TypeOfToys, "TypeOfToyID", "Name"), new { @class = "form-control" })
+                    @*@Html.DropDownList("TypeOfToyID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.ValidationMessageFor(model => model.Toy.TypeOfToyID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Toy.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Toy.ImageUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.Avaibility, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Toy.Avaibility, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Toy.Avaibility, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Toy.YearOfManufactire, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Toy.YearOfManufactire, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.TextBoxFor(model => model.Toy.YearOfManufactire, "{0:MM/dd/yyyy}", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Toy.YearOfManufactire, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success btn-sm" />
+                @Html.Partial("_BackToListButtonPartial")
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,41 @@
+﻿@model GreenToys.Models.TypeOfToy
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div>
+    <h3>TypeOfToy Details</h3>
+    <hr />
+    <div class="form-border">
+        <fieldset disabled>
+            <!--disabled - user cannot edit textbox-->
+            <div class="row" style="padding-bottom:5px; padding-top:5px;">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:5px; padding-top:5px;">
+                <div class="col-md-2">
+                    @Html.LabelFor(m => m.ToyDescription, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ToyDescription, htmlAttributes: new { @class = "form-control", style = "height:250px;" })
+                </div>
+            </div>
+
+        </fieldset>
+    </div>
+</div>
+<br />
+<br />
+
+<p>
+    @Html.Partial("_BackToListButtonPartial")
+    @Html.Partial("_EditButtonPartial", Model.TypeOfToyID)
+</p>
+
+
