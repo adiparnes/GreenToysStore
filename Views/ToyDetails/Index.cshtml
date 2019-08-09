@@ -1,0 +1,157 @@
+﻿@model GreenToys.ViewModel.ToyRentalViewModel
+@using GreenToys.Utility
+@{
+    ViewBag.Title = "Index";
+}
+
+@using(Html.BeginForm("Reserve", "ToyRent"))
+{
+    @Html.AntiForgeryToken();
+    <div class="row">
+        @*Toy Image*@
+        <div class="col-sm-3 col-xs-4">
+            <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;padding:10px" />
+        </div>
+
+        @*Toy Name and Description*@
+        <div class="col-sm-6 col-xs-8">
+            <div>
+                <h2><b>@Model.NameOfToy</b></h2>                
+            </div>
+            <div><br/>
+                <span>@Html.Raw(Model.ToyDescription)</span>
+            </div><br/>
+        </div>
+
+
+        @*Toy Price and other toy details*@
+        <div class="col-sm-3 col-xs-12">
+            <br/>
+            <div>
+                @{ 
+                    List<SelectListItem> listItem = new List<SelectListItem>();
+                    listItem.Add(new SelectListItem
+                    {
+                        Text=StatisDetails.OneMonth,
+                        Value= StatisDetails.OneMonthCount
+                    });
+                }
+                @if (Model.RentalPriceOneMonth != 0)
+                {
+                    //user login user not admin
+                    
+                    <div class="form-control" style="height:350px;">
+                        <div class="input-group" style="height:30px;">
+                            <label>Price:</label>
+                            <label id="lblMSRP" style="font-weight:normal;">₪@(Model.Price)</label><br/>
+                        </div>
+                        <hr/>
+                        <div class="input-group" style="height:90px;">
+                            <label>Rental Price: </label><br/>
+                            <label id="lblOneMonth" style="font-weight:normal;">One Month: $@(Model.RentalPriceOneMonth)</label><br/>
+                        </div>
+                        <br/>
+                        <label>Select your rental duration: </label><br/>
+                        @Html.DropDownListFor(m=>m.RentalDuration,listItem,new {@class="Form-control" })
+                        <span style="font-size:12px;">Reserved before 3 pm for same day pickup.<br/><br/></span>
+                        
+                        @if (Model.Avaibility > 0)
+                        {
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-thumbs-up"></span>Reserve
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>Unavailable
+                            </button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    //user not login or user admin
+                    <div class="form-control" style="height:150px;">
+                        <div class="input-group" style="height:30px;">
+                            <label>MSRP</label>
+                            <label id="lblMSRP" style="font-weight:normal;">$@(Model.Price)</label><br />
+                        </div>
+                        <hr/>
+
+                        @if (User.IsInRole(StatisDetails.AdminUserRole)&&Model.Avaibility>0)
+                        {
+                            //admin user create button
+                            @Html.ActionLink("Create Rental","Create","ToyRent",
+                             new {type=Model.TypeOfToy, toyName=Model.NameOfToy},new { @class="btn btn-primary"})
+                        }
+                        else
+                        {
+                            if(User.IsInRole(StatisDetails.AdminUserRole) && Model.Avaibility == 0)
+                            {
+                                //admin user with book not available
+                                <button type="submit" disabled class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-thumbs-down"></span>Unavailable
+                                </button>
+                            }
+                            else
+                            {
+                                //user not logged in
+                                <span>Login to unlock the rental price!</span>
+                            }
+                        }
+                    </div>
+                }
+
+            </div>
+
+            <h4>Product details</h4>
+            <dl>
+                <dt><!--?????----m.ToyID-----??????-->
+                    @Html.DisplayNameFor(m=>m.NameOfToy)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp; @Html.DisplayFor(m=>m.NameOfToy)
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    <!--?????----m.ToyID-----??????-->
+                    @Html.DisplayNameFor(m => m.Avaibility)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Avaibility)
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    <!--?????----m.ToyID-----??????-->
+                    @Html.DisplayNameFor(m => m.ForAge)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.ForAge)
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    <!--?????----m.ToyID-----??????-->
+                    @Html.DisplayNameFor(m => m.Price)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Price)
+                </dd>
+            </dl>
+
+
+
+
+
+
+        </div>
+
+    </div>
+                    }
+

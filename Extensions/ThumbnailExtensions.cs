@@ -25,7 +25,7 @@ namespace GreenToys.Extensions
                                   ToyDescription=b.ToyDescription,
                                   TypeOfToy = b.TypeOfToy,
                                   ImageUrl = b.ImageUrl,
-                                  Link = "/ToyDetail/Index" + b.ToyID
+                                  Link = "/ToyDetails/Index?id=" + b.ToyID
                               }).ToList();
                 if (search != null)
                 {

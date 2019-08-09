@@ -9,5 +9,10 @@ namespace GreenToys.Utility
     {
         public const string EndUserRole = "Costumer";
         public const string AdminUserRole = "Admin";
+
+        public const string OneMonth = "One Month";
+        //public const string AdminUserRole = "Admin";
+        public const string OneMonthCount = "1";
+        
     }
 }

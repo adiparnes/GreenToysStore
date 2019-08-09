@@ -253,6 +253,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembershipTypeController.cs" />
+    <Compile Include="Controllers\ToyDetailsController.cs" />
     <Compile Include="Controllers\ToysController.cs" />
     <Compile Include="Controllers\TypeOfToysController.cs" />
     <Compile Include="Controllers\UserViewModelsController.cs" />
@@ -345,6 +346,10 @@
     <Compile Include="Migrations\201908091113383_addtoyrentalmodel.Designer.cs">
       <DependentUpon>201908091113383_addtoyrentalmodel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908091144381_addrentalduration.cs" />
+    <Compile Include="Migrations\201908091144381_addrentalduration.Designer.cs">
+      <DependentUpon>201908091144381_addrentalduration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataTime.cs" />
@@ -360,6 +365,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\StatisDetails.cs" />
     <Compile Include="ViewModel\ThumbnailBoxViewModel.cs" />
+    <Compile Include="ViewModel\ToyRentalViewModel.cs" />
     <Compile Include="ViewModel\ToyViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
@@ -469,6 +475,7 @@
     <Content Include="Views\UserViewModels\Details.cshtml" />
     <Content Include="Views\UserViewModels\Edit.cshtml" />
     <Content Include="Views\UserViewModels\Index.cshtml" />
+    <Content Include="Views\ToyDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -549,6 +556,9 @@
     <EmbeddedResource Include="Migrations\201908091113383_addtoyrentalmodel.resx">
       <DependentUpon>201908091113383_addtoyrentalmodel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908091144381_addrentalduration.resx">
+      <DependentUpon>201908091144381_addrentalduration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -569,7 +579,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54139</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54139/</IISUrl>
+          <IISUrl>https://localhost:44328/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
