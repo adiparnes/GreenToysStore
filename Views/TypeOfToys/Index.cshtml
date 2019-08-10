@@ -4,7 +4,11 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@{ 
+    ApplicationDbContext db = new ApplicationDbContext();
+    var toys = db.Toys.ToList();
+    
+}
 <h2>Our Type of toys</h2>
 
 <p>
@@ -24,16 +28,31 @@
         <th>
             @Html.DisplayNameFor(m => m.Name)
         </th>
+        <th>Quantity</th> 
         <th></th>
         <th></th><!--to extend the line above the three buttons (edit,detail...)-->
     </tr>
     <!--we want to run on every item in our model and desplay all the typeoftoy names here-->
     @foreach (var item in Model) 
     {
+        int sum = 0;
         <tr>
             <td><!--this DisplayFor will display the actual value-->
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+            @*<th>@Html.Display("Quantity")</th>*@   
+            <td>
+                @foreach (var toy in toys)
+                {
+                    if (item.TypeOfToyID == toy.TypeOfToyID)
+                    {
+                        sum += toy.Avaibility;
+                    }
+                }
+                @*@Html.Label("Quantity")*@
+                @Html.DisplayFor(m=>sum)
+            </td>
+           
             <td>
                 @Html.Partial("_EditDetailsDeleteButtonPartial",new IndividualButtonPartial {TypeOfToyID= item.TypeOfToyID})
             </td>

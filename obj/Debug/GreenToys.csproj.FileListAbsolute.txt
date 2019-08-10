@@ -224,3 +224,7 @@ C:\Users\Owner\Desktop\applications\GreenToys\bin\Google.Apis.Core.pdb
 C:\Users\Owner\Desktop\applications\GreenToys\bin\Google.Apis.Core.xml
 C:\Users\Owner\Desktop\applications\GreenToys\obj\Debug\GreenToys.Migrations.addtoyrentalmodel1.resources
 C:\Users\Owner\Desktop\applications\GreenToys\obj\Debug\GreenToys.Migrations.addtoyrentalmodelrename.resources
+C:\Users\Owner\Desktop\applications\GreenToys\bin\PagedList.dll
+C:\Users\Owner\Desktop\applications\GreenToys\bin\PagedList.Mvc.dll
+C:\Users\Owner\Desktop\applications\GreenToys\bin\PagedList.xml
+C:\Users\Owner\Desktop\applications\GreenToys\bin\PagedList.Mvc.xml

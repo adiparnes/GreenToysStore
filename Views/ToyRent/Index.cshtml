@@ -1,10 +1,19 @@
-﻿@model IEnumerable<GreenToys.ViewModel.ToyRentalViewModel>
+﻿@model IPagedList<GreenToys.ViewModel.ToyRentalViewModel>
+
+@using PagedList;
+@using PagedList.Mvc;
 @using GreenToys.Utility
 @using GreenToys.Models
 
 @{
     ViewBag.Title = "Index";
 }
+
+
+
+@using (Html.BeginForm("Index", "ToyRent", FormMethod.Get))
+{
+
 <br/>
 <div class="row">
     <div class="col-sm-4">
@@ -12,7 +21,7 @@
         @if (User.IsInRole(StatisDetails.AdminUserRole))
         {
             <p>@Html.Partial("_CreateButtonPartial")</p>
-        }
+            }
     </div>
     <div class="col-sm-8">
         <div class="row">
@@ -50,31 +59,31 @@
         <th></th>
         <th></th>
         <th>
-            @Html.DisplayNameFor(m=>m.Name)
+            @Html.DisplayNameFor(m=>m.First().Name)
         </th>
 
         <th>
-            @Html.DisplayNameFor(m => m.Email)
+            @Html.DisplayNameFor(m => m.First().Email)
         </th>
 
         <th>
-            @Html.DisplayNameFor(m => m.StartOfRentalDate)
+            @Html.DisplayNameFor(m => m.First().StartOfRentalDate)
         </th>
 
         <th>
-            @Html.DisplayNameFor(m => m.ScheduledOfRentalDate)
+            @Html.DisplayNameFor(m => m.First().ScheduledOfRentalDate)
         </th>
 
         <th>
-            @Html.DisplayNameFor(m => m.ToyPrice)
+            @Html.DisplayNameFor(m => m.First().ToyPrice)
         </th>
 
         <th>
-            @Html.DisplayNameFor(m => m.RentalDuration)
+            @Html.DisplayNameFor(m => m.First().RentalDuration)
         </th>
 
         <th>
-            @Html.DisplayNameFor(m => m.Status)
+            @Html.DisplayNameFor(m => m.First().Status)
 
         </th>
         <th></th>
@@ -117,7 +126,7 @@
                Action="Details",
                ButtonType="btn-success",
                Glyph="list",
-               Text="Details Button",
+               Text="Details",
                ToyID=null,
                CustomerID=null,
                TypeOfToyID=null,
@@ -135,4 +144,10 @@
     }
 
 </table>
+    @Html.PagedListPager(Model,pageNumber=>Url.Action("Index",new { pageNumber}))
 
+
+
+
+
+}

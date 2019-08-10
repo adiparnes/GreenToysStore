@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;//import to requried
 using System.Linq;
 using System.Web;
@@ -32,7 +33,7 @@ namespace GreenToys.Models
         public string ImageUrl{ get; set; }
 
         [Required]
-        [Range(0,1000)]//range the number for each toy
+        [Range(0,1000)]//range the number for each toy       
         public int Avaibility{ get; set; }
 
         [Required]

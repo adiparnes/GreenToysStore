@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace GreenToys.Controllers
 {
@@ -79,7 +80,7 @@ namespace GreenToys.Controllers
                     ToyPrice = rentalPrice,
                     ScheduledOfRentalDate = toyRent.ScheduledOfRentalDate,
                     RentalDuration=rentalDuration,
-                    Status = ToyRent.StatusEnum.Requested,
+                    Status = ToyRent.StatusEnum.Approved,
                     UserId = userDetails.ToList()[0].Id
 
                 };
@@ -99,7 +100,7 @@ namespace GreenToys.Controllers
 
 
         // GET: ToyRent
-        public ActionResult Index()
+        public ActionResult Index(int? pageNumber,string option=null,string search=null)
         {
             string userId = User.Identity.GetUserId();
 
@@ -133,14 +134,28 @@ namespace GreenToys.Controllers
                             StartOfRentalDate = tr.StartOfRentalDate
 
                         };
+            if (option == "email" && search.Length > 0)
+            {
+                model = model.Where(u => u.Email.Contains(search));
+            }
+            if (option == "name" && search.Length > 0)
+            {
+                model = model.Where(u => u.FirstName.Contains(search)||u.LastName.Contains(search));
+            }
+            if (option == "status" && search.Length > 0)
+            {
+                model = model.Where(u => u.Status.Contains(search));
+            }
+
+
             //not admin user can see only himself
             if (!User.IsInRole(StatisDetails.AdminUserRole))
             {
                 model = model.Where(u => u.UserId.Equals(userId));
             }
 
-
-            return View(model.ToList());
+            //each page 5 rows-----------------------
+            return View(model.ToList().ToPagedList(pageNumber?? 1,5));
         }
 
 

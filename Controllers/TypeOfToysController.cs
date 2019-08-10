@@ -21,6 +21,7 @@ namespace GreenToys.Controllers
         // GET: TypeOfToys
         public ActionResult Index()
         {
+            
             //return View(db.ToysType.ToList());
             return View(db.ToysType.ToList());
         }
@@ -33,6 +34,7 @@ namespace GreenToys.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             TypeOfToy typeOfToy = db.ToysType.Find(id);// find me a toytype where id is
             //equal to what we are passing
 
