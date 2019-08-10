@@ -92,7 +92,15 @@
                 <img src="@Model.Toy.ImageUrl" alt="" style="width:100%;height:auto" />
             </div>
         </div>
-
+        <br />
+        <br />
+        <canvas class="col-sm-2" id="myCanvas" width="200" height="100" >Your browser does not support the HTML5 canvas tag.</canvas>
+        <script>
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                ctx.font = "30px Arial";
+                ctx.fillText("Looking good!", 10, 50);
+        </script>
     </div>
     <br />
     <div class="form-group">

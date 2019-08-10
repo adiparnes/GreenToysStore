@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Net;
 
 namespace GreenToys.Controllers
 {
@@ -200,7 +201,57 @@ namespace GreenToys.Controllers
             
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
 
+            var model = getVMPFromToyRent(toyRent);
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            return View(model);
+        }
+
+        private ToyRentalViewModel getVMPFromToyRent(ToyRent toyRent)
+        {
+            Toy toySelected = db.Toys.Where(t => t.ToyID == toyRent.ToyID).FirstOrDefault();
+            var userDetails = from u in db.Users
+                              where u.Id.Equals(toyRent.UserId)
+                              select new { u.Id,u.FirstName,u.LastName,u.BirthDate,u.Email};
+            ToyRentalViewModel model = new ToyRentalViewModel
+            {
+                ToyRentID=toyRent.ToyRentID,
+                ToyID=toyRent.ToyID,
+                ToyPrice=toyRent.ToyPrice,
+                Price = toySelected.Price,
+                FirstName = userDetails.ToList()[0].FirstName,
+                LastName = userDetails.ToList()[0].LastName,
+                BirthDate = userDetails.ToList()[0].BirthDate,
+                Email = userDetails.ToList()[0].Email,
+                UserId = userDetails.ToList()[0].Id,
+                ScheduledOfRentalDate=toyRent.ScheduledOfRentalDate,
+                StartOfRentalDate=toyRent.StartOfRentalDate,
+                Avaibility= toySelected.Avaibility,
+                YearOfManufactire= toySelected.YearOfManufactire,
+                ToyDescription= toySelected.ToyDescription,
+                TypeOfToyID= toySelected.TypeOfToyID,
+                TypeOfToy=db.ToysType.FirstOrDefault(t=>t.TypeOfToyID.Equals(toySelected.TypeOfToyID)),
+                ForAge= toySelected.ForAge,
+                ImageUrl= toySelected.ImageUrl,
+                RentalDuration=toyRent.RentalDuration,
+                Status=toyRent.Status.ToString(),
+                NameOfToy= toySelected.NameOfToy,
+                AdditionalCharge=toyRent.AdditionalCharge
+            };
+            return model;
+        }
 
 
         protected override void Dispose(bool disposing)

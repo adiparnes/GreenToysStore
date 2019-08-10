@@ -26,6 +26,13 @@ namespace GreenToys.Controllers
             return View(db.ToysType.ToList());
         }
 
+        public ActionResult groupBy(TypeOfToy type)
+        {
+            var toys = db.Toys.GroupBy(toy => toy.TypeOfToyID.Equals(type.TypeOfToyID));
+                  
+            return View(toys.ToList());
+        }
+
         // GET: TypeOfToys/Details/5
         //general id
         public ActionResult Details(int? id)

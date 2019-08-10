@@ -14,137 +14,248 @@
 @using (Html.BeginForm("Index", "ToyRent", FormMethod.Get))
 {
 
-<br/>
-<div class="row">
-    <div class="col-sm-4">
-        <h3>Toy Rental Portal</h3>
-        @if (User.IsInRole(StatisDetails.AdminUserRole))
-        {
-            <p>@Html.Partial("_CreateButtonPartial")</p>
-            }
-    </div>
-    <div class="col-sm-8">
-        <div class="row">
-            <div class="col-sm-12 text-right">
-                @if (User.IsInRole(StatisDetails.AdminUserRole))
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Toy Rental Portal</h3>
+            @if (User.IsInRole(StatisDetails.AdminUserRole))
             {
+                <p>@Html.Partial("_CreateButtonPartial")</p>
+            }
+        </div>
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    @if (User.IsInRole(StatisDetails.AdminUserRole))
+                    {
+                        <label class="radio-inline">
+                            @Html.RadioButton("option", "name") Name
+                        </label>
+                        <label class="radio-inline">
+                            @Html.RadioButton("option", "email") Email
+                        </label>
+                    }
                     <label class="radio-inline">
-                        @Html.RadioButton("option", "name") Name
+                        @Html.RadioButton("option", "status") Status
                     </label>
-                    <label class="radio-inline">
-                        @Html.RadioButton("option", "email") Email
-                    </label>
-                }
-                <label class="radio-inline">
-                    @Html.RadioButton("option", "status") Status
-                </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pull-right">
+                    <button type="submit" name="submit" value="search" class="btn btn-sm btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp;Search
+                    </button>
+                </div>
+                <div class="pull-right">
+                    @Html.Editor("search", new { htmlAttributes = new { @class = "form-control input-sm" } })
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="pull-right">
-                <button type="submit" name="submit" value="search" class="btn btn-sm btn-primary">
-                    <span class="glyphicon glyphicon-search"></span>&nbsp;Search
-                </button>
-            </div>
-            <div class="pull-right">
-                @Html.Editor("search", new{ htmlAttributes= new { @class = "form-control input-sm" }})
-            </div>
-        </div>
+
     </div>
 
-</div>
+    <table class="table table-hover table-condensed">
+        <tr class="table-header">
+            <th></th>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().Name)
+            </th>
 
-<table class="table table-hover table-condensed">
-    <tr class="table-header">
-        <th></th>
-        <th></th>
-        <th>
-            @Html.DisplayNameFor(m=>m.First().Name)
-        </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().Email)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(m => m.First().Email)
-        </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().StartOfRentalDate)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(m => m.First().StartOfRentalDate)
-        </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().ScheduledOfRentalDate)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(m => m.First().ScheduledOfRentalDate)
-        </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().ToyPrice)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(m => m.First().ToyPrice)
-        </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().RentalDuration)
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(m => m.First().RentalDuration)
-        </th>
+            <th>
+                @Html.DisplayNameFor(m => m.First().Status)
 
-        <th>
-            @Html.DisplayNameFor(m => m.First().Status)
-
-        </th>
-        <th></th>
-        <th></th>
-
-    </tr>
-
-    @foreach(var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.HiddenFor(m=>item.UserId)
-            </td>
-            <td>
-                @Html.HiddenFor(m => item.ToyID)
-            </td>
-            <td>
-                @Html.DisplayFor(m=>item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.StartOfRentalDate)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.ToyPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.RentalDuration)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.Status)
-            </td>
-            <td>
-                @*Details*@
-                @Html.Partial("_IndividualButtonPartial",new IndividualButtonPartial
-           {
-
-               Action="Details",
-               ButtonType="btn-success",
-               Glyph="list",
-               Text="Details",
-               ToyID=null,
-               CustomerID=null,
-               TypeOfToyID=null,
-               MembershipTypeID=null,
-               UserID=null,
-               ToyRentalID=item.ToyRentID
-           })
-            </td>
-            <td>
-                @*Action Button*@
-
-            </td>
+            </th>
+            <th></th>
+            <th></th>
 
         </tr>
-    }
 
-</table>
-    @Html.PagedListPager(Model,pageNumber=>Url.Action("Index",new { pageNumber}))
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(m => item.UserId)
+                </td>
+                <td>
+                    @Html.HiddenFor(m => item.ToyID)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.StartOfRentalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ToyPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.RentalDuration)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.Status)
+                </td>
+                <td>
+                    @*Details*@
+                    @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+               {
+
+                   Action = "Details",
+                   ButtonType = "btn-success",
+                   Glyph = "list",
+                   Text = "",//Details
+                   ToyID = null,
+                   CustomerID = null,
+                   TypeOfToyID = null,
+                   MembershipTypeID = null,
+                   UserID = null,
+                   ToyRentalID = item.ToyRentID
+               })
+                </td>
+                <td>
+                    @*Action Button*@
+
+                    @if (item.Status.ToString().ToLower().Equals(StatisDetails.RequestedLower) && User.IsInRole(StatisDetails.AdminUserRole))
+                    {
+                        //approve and decline buttons
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                   {
+
+                       Action = "Decline",
+                       ButtonType = "btn-danger",
+                       Glyph = "remove",
+                       Text = "",//Decline
+                       ToyID = null,
+                       CustomerID = null,
+                       TypeOfToyID = null,
+                       MembershipTypeID = null,
+                       UserID = null,
+                       ToyRentalID = item.ToyRentID
+                   })
+
+
+
+                        @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                   {
+
+                       Action = "Approve",
+                       ButtonType = "btn-primary",
+                       Glyph = "ok",
+                       Text = "",//Approve
+                       ToyID = null,
+                       CustomerID = null,
+                       TypeOfToyID = null,
+                       MembershipTypeID = null,
+                       UserID = null,
+                       ToyRentalID = item.ToyRentID
+                   })
+
+                    }
+                    else
+                    {
+                        if ((item.Status.ToString().ToLower().Equals(StatisDetails.RequestedLower) && User.IsInRole(StatisDetails.EndUserRole)) ||
+                            (User.IsInRole(StatisDetails.AdminUserRole) && !item.Status.ToString().ToLower().Equals(StatisDetails.ClosedLower)))
+                        {
+                            //show delete button
+                            //if user is EndContext user and status is requested
+                            //if user is admin and status is not equal to closed and requested
+
+                            @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                       {
+
+                           Action = "Delete",
+                           ButtonType = "btn-danger",
+                           Glyph = "trash",
+                           Text = "Delete",
+                           ToyID = null,
+                           CustomerID = null,
+                           TypeOfToyID = null,
+                           MembershipTypeID = null,
+                           UserID = null,
+                           ToyRentalID = item.ToyRentID
+                       })
+
+
+                        }
+                        if (item.Status.ToString().ToLower().Equals(StatisDetails.ApprovedLower) && User.IsInRole(StatisDetails.EndUserRole))
+                        {
+                            //display pickup button
+
+                            @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                       {
+
+                           Action = "PickUp",
+                           ButtonType = "btn-primary",
+                           Glyph = "share-alt",
+                           Text = "PickUp",
+                           ToyID = null,
+                           CustomerID = null,
+                           TypeOfToyID = null,
+                           MembershipTypeID = null,
+                           UserID = null,
+                           ToyRentalID = item.ToyRentID
+                       })
+
+
+
+                        }
+                        else
+                        {
+                            if (item.Status.ToString().ToLower().Equals(StatisDetails.RentedLower) && User.IsInRole(StatisDetails.EndUserRole))
+                            {
+                                //display return button
+                                @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
+                           {
+
+                               Action = "Return",
+                               ButtonType = "btn-primary",
+                               Glyph = "retweet",
+                               Text = "Return",
+                               ToyID = null,
+                               CustomerID = null,
+                               TypeOfToyID = null,
+                               MembershipTypeID = null,
+                               UserID = null,
+                               ToyRentalID = item.ToyRentID
+                           })
+
+
+
+                            }
+                        }
+                    }
+
+
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))
 
 
 

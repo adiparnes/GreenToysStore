@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<GreenToys.Models.TypeOfToy>
 @using GreenToys.Models
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -40,6 +41,7 @@
             <td><!--this DisplayFor will display the actual value-->
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+
             @*<th>@Html.Display("Quantity")</th>*@   
             <td>
                 @foreach (var toy in toys)

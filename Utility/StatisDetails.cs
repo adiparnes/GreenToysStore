@@ -12,7 +12,12 @@ namespace GreenToys.Utility
 
         public const string OneMonth = "One Month";
         //public const string AdminUserRole = "Admin";
-        public const string OneMonthCount = "1";
+        public const string RequestedLower = "requested";
+        public const string ApprovedLower = "approved";
+        public const string RentedLower = "rented";
+        public const string PickUpLower = "pickup";
+        public const string ClosedLower = "closed";
         
+
     }
 }
