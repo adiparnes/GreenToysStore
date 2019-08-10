@@ -32,7 +32,7 @@ namespace GreenToys.Models
         public DbSet<Toy> Toys { get; set; }
         public DbSet<TypeOfToy> ToysType { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
-        public DbSet<ToyRent> ToyRental { get; set; }
+        public DbSet<ToyRent> ToyRents { get; set; }
 
 
         public ApplicationDbContext()

@@ -49,20 +49,6 @@ namespace GreenToys.Controllers
             }
     
       
-             /*select new UserViewModel
-             {
-
-                 Id = u.Id,
-                 FirstName = u.FirstName,
-                 LastName = u.LastName,
-                 Email = u.Email,
-                 Phone = u.Phone,
-                 BirthDate = u.BirthDate,
-                 MembershipTypeID = u.MembershipTypeID,
-                 //MembershipTypes = (ICollection<MembershipType>)db.MembershipTypes.ToList().Where(n => n.MembershipTypeID.Equals(u.MembershipTypeID)),
-                 Disable = u.Disable
-             };*/
-            //var userList = uvm.ToList();
             return View(uvm);
         }
 

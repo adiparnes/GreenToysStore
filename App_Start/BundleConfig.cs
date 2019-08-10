@@ -22,11 +22,15 @@ namespace GreenToys
             bundles.Add(new ScriptBundle("~/bundles/toyRentalJs").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/AdminMenu.js",
+                      "~/Scripts/typeahead.bundle.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/thumbnail.css",
+                      "~/Content/Social.css",
+                      "~/Content/typeahead.css",
+                      "~/Content/ToyDetails.css",
                       "~/Content/site.css"));
         }
     }

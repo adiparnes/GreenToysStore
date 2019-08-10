@@ -9,13 +9,13 @@
     @Html.AntiForgeryToken();
     <div class="row">
         @*Toy Image*@
-        <div class="col-sm-3 col-xs-4">
+        <div class="col-sm-3 col-xs-4 image-toy">
             <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;padding:10px" />
         </div>
 
         @*Toy Name and Description*@
-        <div class="col-sm-6 col-xs-8">
-            <div>
+        <div class="col-sm-6 col-xs-8 content-toy-main">
+            <div class="content-toy-NameOfToy">
                 <h2><b>@Model.NameOfToy</b></h2>                
             </div>
             <div><br/>
@@ -25,7 +25,7 @@
 
 
         @*Toy Price and other toy details*@
-        <div class="col-sm-3 col-xs-12">
+        <div class="col-sm-3 col-xs-12 content-toy-product-details">
             <br/>
             <div>
                 @{ 
@@ -40,19 +40,21 @@
                 {
                     //user login user not admin
                     
-                    <div class="form-control" style="height:350px;">
+                    <div class="form-control" style="height:360px;">
                         <div class="input-group" style="height:30px;">
-                            <label>Price:</label>
-                            <label id="lblMSRP" style="font-weight:normal;">₪@(Model.Price)</label><br/>
+                            <label>For Age:</label>
+                            <label id="lblMSRP" style="font-weight:normal;">@(Model.ForAge)</label><br/>
                         </div>
                         <hr/>
                         <div class="input-group" style="height:90px;">
+                            <label>Original Price: </label><br />
+                            <label id="lblOneMonth" style="font-weight:normal;">One Month: ₪@(Model.Price)</label><br />
                             <label>Rental Price: </label><br/>
-                            <label id="lblOneMonth" style="font-weight:normal;">One Month: $@(Model.RentalPriceOneMonth)</label><br/>
+                            <label id="lblOneMonth" style="font-weight:normal;">One Month: ₪@(Model.RentalPriceOneMonth)</label><br/>
                         </div>
                         <br/>
                         <label>Select your rental duration: </label><br/>
-                        @Html.DropDownListFor(m=>m.RentalDuration,listItem,new {@class="Form-control" })
+                        @Html.DropDownListFor(m=>m.RentalDuration,listItem,new {@class="form-control" })
                         <span style="font-size:12px;">Reserved before 3 pm for same day pickup.<br/><br/></span>
                         
                         @if (Model.Avaibility > 0)
@@ -60,13 +62,16 @@
                             <button type="submit" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-thumbs-up"></span>Reserve
                             </button>
+                            <br/>
                         }
                         else
                         {
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit" class="btn btn-danger disabled">
                                 <span class="glyphicon glyphicon-thumbs-down"></span>Unavailable
                             </button>
+                            <br />
                         }
+                        <br />
                     </div>
                 }
                 else
@@ -81,9 +86,10 @@
 
                         @if (User.IsInRole(StatisDetails.AdminUserRole)&&Model.Avaibility>0)
                         {
+                            //-----------------------------------isbn
                             //admin user create button
                             @Html.ActionLink("Create Rental","Create","ToyRent",
-                             new {type=Model.TypeOfToy, toyName=Model.NameOfToy},new { @class="btn btn-primary"})
+                             new {type=Model.ToyDescription, toyName=Model.NameOfToy},new { @class="btn btn-primary"})
                         }
                         else
                         {
@@ -105,7 +111,7 @@
 
             </div>
 
-            <h4>Product details</h4>
+            <h4 class="product-details-heading">Product details</h4>
             <dl>
                 <dt><!--?????----m.ToyID-----??????-->
                     @Html.DisplayNameFor(m=>m.NameOfToy)
@@ -138,17 +144,17 @@
             <dl>
                 <dt>
                     <!--?????----m.ToyID-----??????-->
-                    @Html.DisplayNameFor(m => m.Price)
+                    @Html.DisplayNameFor(m => m.TypeOfToy)
                 </dt>
                 <dd>
-                    &nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Price)
+                    &nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.TypeOfToy.Name)
                 </dd>
             </dl>
 
 
 
 
-
+            @Html.HiddenFor(m=>m.ToyID)
 
         </div>
 

@@ -1,0 +1,20 @@
+﻿.image-toy{
+    padding-top:50px;
+    
+}
+.content-toy-main{
+    padding-top:30px;
+    text-align:justify;
+}
+.content-toy-main{
+    border-bottom:1px solid #b1b1b1;
+}
+.content-toy-product-details{
+     border-left:1px solid #b1b1b1;
+     padding-top:15px;
+}
+
+.product-details-heading{
+    color:#0082ff;
+    padding-top:40px;
+}

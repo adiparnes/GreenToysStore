@@ -77,6 +77,7 @@ namespace GreenToys.ViewModel
 
         // User details
         public string UserId { get; set; }
+        public string Email { get; set; }
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [DisplayName("Last Name")]

@@ -57,8 +57,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.MembershipTypeID,"MenbershipID", new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.MembershipTypeID,"MembershipID", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
+            @*@Html.DropDownListFor(m => m.MembershipTypeID, new SelectList(Model.MembershipTypes, "MembershipTypeID", "MembershipName"), new { @class = "form-control" })*@
             @Html.DropDownListFor(m => m.MembershipTypeID,new SelectList(Model.MembershipTypes, "MembershipTypeID", "MembershipName"), new { @class = "form-control" })
         </div>
     </div>
@@ -67,6 +68,7 @@
             <input type="submit" class="btn btn-primary btn-sm" value="Register" />
         </div>
     </div>
+    <br/>
 }
 
 @section Scripts {

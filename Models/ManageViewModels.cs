@@ -15,6 +15,7 @@ namespace GreenToys.Models
         public bool BrowserRemembered { get; set; }
 
         public ICollection<MembershipType> MembershipTypes { get; set; }
+
         [Required]
         public int MembershipTypeID { get; set; }
         public string FirstName { get; set; }

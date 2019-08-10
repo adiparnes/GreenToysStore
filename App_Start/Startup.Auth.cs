@@ -54,15 +54,15 @@ namespace GreenToys
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "2472417716153974",
+               appSecret: "6b3ed0893a05c87d3b5d87bf1e081407");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "898578328566-o2i01ibvfsos1k9dl4p3oc6rd46cvi8p.apps.googleusercontent.com",
+                ClientSecret = "k0wvWJp1ol8UdwUy4qaR0rbd"
+            });
         }
     }
 }

@@ -18,6 +18,8 @@ namespace GreenToys.Models
         public int? CustomerID { get; set; }
         public int? MembershipTypeID { get; set; }
         public string UserID { get; set; }
+        public int? ToyRentalID { get; set; }
+
 
         public string ActionParameter
         {
@@ -51,6 +53,11 @@ namespace GreenToys.Models
                     param.Append(String.Format("{0}", UserID));
 
                 }
+                if (ToyRentalID != null && ToyRentalID > 0)
+                {
+                    param.Append(String.Format("{0}", ToyRentalID));
+                }
+
 
                 return param.ToString();
             }
