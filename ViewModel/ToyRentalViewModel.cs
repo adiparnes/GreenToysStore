@@ -1,4 +1,5 @@
 ﻿using GreenToys.Models;
+using GreenToys.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,7 +91,24 @@ namespace GreenToys.ViewModel
         [DisplayFormat(DataFormatString = "{0: MMM dd yyyy}")]
         public DateTime BirthDate { get; set; }
 
-
+        public string actionName
+        {
+            get
+            {
+                if(Status.ToLower().Contains(StatisDetails.RequestedLower)){
+                    return "Approve";
+                }
+                if (Status.ToLower().Contains(StatisDetails.ApprovedLower))
+                {
+                    return "PickUp";
+                }
+                if (Status.ToLower().Contains(StatisDetails.RentedLower))
+                {
+                    return "Return";
+                }
+                return null;
+            }
+        }
 
     }
 }

@@ -65,7 +65,9 @@
             <th>
                 @Html.DisplayNameFor(m => m.First().Email)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(m => m.First().NameOfToy)
+            </th>
             <th>
                 @Html.DisplayNameFor(m => m.First().StartOfRentalDate)
             </th>
@@ -78,9 +80,9 @@
                 @Html.DisplayNameFor(m => m.First().ToyPrice)
             </th>
 
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(m => m.First().RentalDuration)
-            </th>
+            </th>*@
 
             <th>
                 @Html.DisplayNameFor(m => m.First().Status)
@@ -107,14 +109,20 @@
                     @Html.DisplayFor(m => item.Email)
                 </td>
                 <td>
+                    @Html.DisplayFor(m => item.NameOfToy)
+                </td>
+                <td>
                     @Html.DisplayFor(m => item.StartOfRentalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.ScheduledOfRentalDate)
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.ToyPrice)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(m => item.RentalDuration)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(m => item.Status)
                 </td>
@@ -189,7 +197,7 @@
                            Action = "Delete",
                            ButtonType = "btn-danger",
                            Glyph = "trash",
-                           Text = "Delete",
+                           Text = "",
                            ToyID = null,
                            CustomerID = null,
                            TypeOfToyID = null,
@@ -200,8 +208,11 @@
 
 
                         }
-                        if (item.Status.ToString().ToLower().Equals(StatisDetails.ApprovedLower) && User.IsInRole(StatisDetails.EndUserRole))
+                        if (item.Status.ToString().ToLower().Equals(StatisDetails.ApprovedLower) && User.IsInRole(StatisDetails.AdminUserRole))
                         {
+                            // ||
+                           // (User.IsInRole(StatisDetails.AdminUserRole) && !item.Status.ToString().ToLower().Equals(StatisDetails.ClosedLower))
+                            //item.Status.ToString().ToLower().Equals(StatisDetails.ApprovedLower) && User.IsInRole(StatisDetails.EndUserRole)
                             //display pickup button
 
                             @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
@@ -210,7 +221,7 @@
                            Action = "PickUp",
                            ButtonType = "btn-primary",
                            Glyph = "share-alt",
-                           Text = "PickUp",
+                           Text = "",
                            ToyID = null,
                            CustomerID = null,
                            TypeOfToyID = null,
@@ -224,7 +235,7 @@
                         }
                         else
                         {
-                            if (item.Status.ToString().ToLower().Equals(StatisDetails.RentedLower) && User.IsInRole(StatisDetails.EndUserRole))
+                            if (item.Status.ToString().ToLower().Equals(StatisDetails.RentedLower) && User.IsInRole(StatisDetails.AdminUserRole))
                             {
                                 //display return button
                                 @Html.Partial("_IndividualButtonPartial", new IndividualButtonPartial
@@ -233,7 +244,7 @@
                                Action = "Return",
                                ButtonType = "btn-primary",
                                Glyph = "retweet",
-                               Text = "Return",
+                               Text = "",
                                ToyID = null,
                                CustomerID = null,
                                TypeOfToyID = null,

@@ -1,0 +1,121 @@
+﻿
+@model GreenToys.ViewModel.ToyRentalViewModel
+
+@using GreenToys.Models
+@{
+    ViewBag.Title = "Approve";
+}
+
+@using (Html.BeginForm(Model.actionName, "ToyRent"))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <h3>Toy Rent @Model.actionName</h3>
+        
+            <div class="row" style="border:5px solid #bbb9b9;border-radius:5px;">
+                <div class="col-sm-10">
+                    <fieldset disabled>
+                        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                            <div class="col-sm-3">
+                                @Html.LabelFor(m => m.NameOfToy, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.NameOfToy, new { @class = "form-control", enabled = "false" })
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                            <div class="col-sm-3">
+                                @Html.LabelFor(m => m.ToyPrice, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ToyPrice, new { @class = "form-control", enabled = "false" })
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                            <div class="col-sm-3">
+                                @Html.LabelFor(m => m.StartOfRentalDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.StartOfRentalDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                            <div class="col-sm-3">
+                                @Html.LabelFor(m => m.ScheduledOfRentalDate, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ScheduledOfRentalDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
+                            </div>
+                        </div>
+                    </fieldset>
+                    @if (Model.actionName.Equals("Return"))
+                {
+                        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+                            <div class="col-sm-3">
+                                @Html.LabelFor(m => m.AdditionalCharge, htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.AdditionalCharge, new { @class = "form-control", enabled = "false" })
+                            </div>
+                        </div>
+                    }
+    <fieldset disabled>
+        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+            <div class="col-sm-3">
+                @Html.LabelFor(m => m.RentalDuration, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.RentalDuration, new { @class = "form-control", enabled = "false" })
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+            <div class="col-sm-3">
+                @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", enabled = "false" })
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+            <div class="col-sm-3">
+                @Html.LabelFor(m => m.BirthDate, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.BirthDate, "{0:MM/dd/yyyy}", new { @class = "form-control", enabled = "false" })
+            </div>
+        </div>
+
+        <div class="row" style="padding-bottom:5px;padding-top:25px;">
+            <div class="col-sm-3">
+                @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", enabled = "false" })
+            </div>
+        </div>
+        <br />
+
+    </fieldset>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="image-toy">
+                                <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto" />
+
+                            </div>
+                        </div>
+            </div>
+
+                   
+                    <p>
+                        @Html.Partial("_BackToListButtonPartial")
+                        <input type="submit" value="@Model.actionName" href="@Url.Action(@Model.actionName, new { id=Model})" class="btn btn-sm btn-success" />
+
+                    </p>
+}
+

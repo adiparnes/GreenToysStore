@@ -219,6 +219,239 @@ namespace GreenToys.Controllers
             return View(model);
         }
 
+
+
+
+        //Approve get
+        public ActionResult Approve(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+
+            var model = getVMPFromToyRent(toyRent);
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View("Approve", model);
+        }
+
+        //Approve post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Approve(int id)//ToyRentalViewModel model
+        {
+
+            if (id == 0)//ToyID??
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+            toyRent.Status = ToyRent.StatusEnum.Approved;
+
+            Toy toyInDb = db.Toys.Find(toyRent.ToyID);
+            toyInDb.Avaibility += 1;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
+        //Delete get
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+
+            var model = getVMPFromToyRent(toyRent);
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(model);
+        }
+
+        //Delete post
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)//ToyRentalViewModel model
+        {
+
+            if (id == 0)//ToyID??
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+
+            var toyInDb = db.Toys.Where(t => t.ToyID.Equals(toyRent.ToyID)).FirstOrDefault();
+            if (!toyRent.Status.ToString().Equals("Rented"))
+            {
+                toyInDb.Avaibility += 1;
+            }
+
+            db.ToyRents.Remove(toyRent);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+
+
+        //PickUp get
+        public ActionResult PickUp(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+
+            var model = getVMPFromToyRent(toyRent);
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View("Approve", model);
+        }
+
+        //PickUp post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PickUp(int id)//ToyRentalViewModel model
+        {
+
+            if (id == 0)//ToyID??
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+            toyRent.Status = ToyRent.StatusEnum.Rented;
+            toyRent.StartOfRentalDate = DateTime.Now;
+            toyRent.ScheduledOfRentalDate = DateTime.Now.AddMonths(1);
+
+
+
+
+            //Toy toyInDb = db.Toys.Find(toyRent.ToyID);
+            //toyInDb.Avaibility += 1;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+
+        //Return get
+        public ActionResult Return(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+
+            var model = getVMPFromToyRent(toyRent);
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View("Approve", model);
+        }
+
+        //Return post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Return(int id)//ToyRentalViewModel model
+        {
+
+            if (id == 0)//ToyID??
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+            toyRent.Status = ToyRent.StatusEnum.closed;
+            toyRent.AdditionalCharge = toyRent.AdditionalCharge;
+
+            Toy toyInDb = db.Toys.Find(toyRent.ToyID);
+            toyInDb.Avaibility += 1;
+            toyRent.EndOfRentalDate = DateTime.Now;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
+
+
+        //decline get
+        public ActionResult Decline(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+
+            var model = getVMPFromToyRent(toyRent);
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(model);
+        }
+
+        //decline post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Decline(int id)//ToyRentalViewModel model
+        {
+            
+            if (id == 0)//ToyID??
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToyRent toyRent = db.ToyRents.Find(id);
+            toyRent.Status = ToyRent.StatusEnum.Rejected;
+
+            Toy toyInDb = db.Toys.Find(toyRent.ToyID);
+            toyInDb.Avaibility += 1;
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+
+
         private ToyRentalViewModel getVMPFromToyRent(ToyRent toyRent)
         {
             Toy toySelected = db.Toys.Where(t => t.ToyID == toyRent.ToyID).FirstOrDefault();
@@ -252,6 +485,13 @@ namespace GreenToys.Controllers
             };
             return model;
         }
+
+
+
+
+
+
+
 
 
         protected override void Dispose(bool disposing)

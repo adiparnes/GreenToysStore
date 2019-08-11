@@ -535,6 +535,9 @@
     <Content Include="Views\ToyRent\Create.cshtml" />
     <Content Include="Views\ToyRent\Index.cshtml" />
     <Content Include="Views\ToyRent\Details.cshtml" />
+    <Content Include="Views\ToyRent\Decline.cshtml" />
+    <Content Include="Views\ToyRent\Approve.cshtml" />
+    <Content Include="Views\ToyRent\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
