@@ -3,11 +3,26 @@
 @{
     ViewBag.Title = "Index";
 }
-<h3>Membership types</h3>
+<h3 style="font-family:cursive;text-transform:capitalize;">Membership types</h3>
 <br/>
 <p>
     @Html.Partial("_CreateButtonPartial")
 </p>
+
+
+<br />
+<div style="float:left;">
+    <form method="get" action="/MembershipType/Index">
+        <b>Search by membership type:</b><br />
+        <p>
+            <input type="text" value="" name="name" placeholder="Filter By membership type" autocomplete="off" />
+            <input type="submit" value="search" class="btn btn-xs btn-primary" />
+        </p>
+
+    </form>
+</div>
+<br />
+
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>

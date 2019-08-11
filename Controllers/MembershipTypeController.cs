@@ -17,9 +17,15 @@ namespace GreenToys.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: MembershipType
-        public ActionResult Index()
+        public ActionResult Index(string name = null)
         {
-            return View(db.MembershipTypes.ToList());
+            var member = from u in db.MembershipTypes select u;
+            if (!String.IsNullOrEmpty(name))
+            {
+                member = member.Where(t => t.MembershipName.Contains(name));
+            }
+
+            return View(member.ToList());
         }
 
         // GET: MembershipType/Details/5

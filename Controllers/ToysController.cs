@@ -14,18 +14,26 @@ namespace GreenToys.Controllers
 {
     // [Authorize] only login requested
     //[Authorize(Roles=StatisDetails.AdminUserRole)] only admin can get there
-    [Authorize(Roles=StatisDetails.AdminUserRole)]
+    //[Authorize(Roles=StatisDetails.AdminUserRole)]
     public class ToysController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Toys
-        public ActionResult Index()
+        public ActionResult Index(string name=null,string type=null)
         {
             //return View(db.Toys.ToList());
             var toys = db.Toys.Include(t => t.TypeOfToy);// Making a list from the db and
             //passing it to the view
             //include-import entity
+            if (!String.IsNullOrEmpty(name))
+            {
+                toys = toys.Where(t => t.NameOfToy.Contains(name));
+            }
+            if (!String.IsNullOrEmpty(type))
+            {
+                toys = toys.Where(t => t.TypeOfToy.Name.Contains(type));
+            }
             return View(toys.ToList());
         }
 
@@ -189,6 +197,14 @@ namespace GreenToys.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Statistics()
+        {
+            ViewBag.Message = "Statistics";
+            return View();
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

@@ -23,42 +23,49 @@ textarea {
     max-width: 350px;
 }
 
-.table-header{
-    background-color:#e6c7ff;
-    color:#4e0aa4;
-}
-.body{
-    background-image:url(Images/7.jpg);
-        /*artical{background-image:url(Images/7.jpg)};*/
+.table-header {
+    background-color: #e6c7ff;
+    color: #4e0aa4;
 }
 
-.form-border{
-    border:1px solid #b1faca;
-    background-color:#b1faca;
-    border-radius:5px;
-    padding-top:20px;
+.body {
+    background-image: url(Images/7.jpg);
+    /*artical{background-image:url(Images/7.jpg)};*/
+}
+
+.form-border {
+    border: 1px solid #b1faca;
+    background-color: #b1faca;
+    border-radius: 5px;
+    padding-top: 20px;
     padding-bottom: 10px;
     padding-left: 10px;
-
-
 }
 
-.footer{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:60px;
-    background-color:#033b72;
-    color:#fff;
-
-}
-.footer>.container{
-    padding-left:10px;
-    padding-right:15px;
-
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #a5f4df;
+    color: #fff;
 }
 
-html{
-    position:relative;
-    min-height:100%;
+    .footer > .container {
+        padding-left: 10px;
+        padding-right: 15px;
+    }
+
+.transition {
+    width: 100px;
+    transition: width 2s;
+}
+
+.transition:hover {
+        width: 300px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }

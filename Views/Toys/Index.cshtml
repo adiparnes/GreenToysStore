@@ -4,14 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h3>Our toys</h3>
+<h3 style="font-family:cursive;text-transform:capitalize;">Our toys</h3>
 <br />
+
 <p>
     <!--my button-->
     @Html.Partial("_CreateButtonPartial")
 
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
+
+<div style="float:left;">
+    <form method="get" action="/Toys/Index">
+        <b>Search by name of toy & type of toy:</b><br/>
+        <p>
+            <input type="text" value="" name="name" placeholder="Filter By name" autocomplete="off" />
+            <input type="text" value="" name="type" placeholder="Filter By type" autocomplete="off" />
+            <input type="submit" value="search" class="btn btn-xs btn-primary" />
+        </p>
+        
+    </form>
+</div>
+<br />
+<br />
 
 <table class="table table-condensed table-hover">
     <tr class="table-header">
@@ -50,31 +65,24 @@
             </td>
             <td>
                 @Html.Partial("_EditDetailsDeleteButtonPartial", new IndividualButtonPartial
-               {
-                   ToyID = item.ToyID
-               })
+           {
+               ToyID = item.ToyID
+           })
             </td>
         </tr>
     }
 
 </table>
 
-<!--things that in not sure i want in the head table-->
-@*<th>
-        @Html.DisplayNameFor(model => model.ForAge)
-    </th>*@
+<a type="button" class="btn transition btn-primary btn-sm" href="@Url.Action("Statistics")" style="border-radius: 6px; background-color: #ffff99;color:#000000">
+    <!--ADI-maybe change the type of the button?-->
+    <span class="glyphicon glyphicon-signal"></span>
+    <span>Statistics</span>
 
-@*<th>
-        @Html.DisplayNameFor(model => model.YearOfManufactire)
-    </th>*@
+</a>
+<br />
+<br />
+<div id='gcw_mainFeM0otkpy' class='gcw_mainFeM0otkpy'></div>
+<a id='gcw_siteFeM0otkpy' href='https://freecurrencyrates.com/en/'>FreeCurrencyRates.com</a>
+<script>function reloadFeM0otkpy() { var sc = document.getElementById('scFeM0otkpy'); if (sc) sc.parentNode.removeChild(sc); sc = document.createElement('script'); sc.type = 'text/javascript'; sc.charset = 'UTF-8'; sc.async = true; sc.id = 'scFeM0otkpy'; sc.src = 'https://freecurrencyrates.com/en/widget-vertical?iso=USDEURGBPJPYCNYXUL&df=2&p=FeM0otkpy&v=fits&source=fcr&width=245&width_title=0&firstrowvalue=1&thm=A6C9E2,FCFDFD,4297D7,5C9CCC,FFFFFF,C5DBEC,FCFDFD,2E6E9E,000000&title=Currency%20Converter&tzo=-180'; var div = document.getElementById('gcw_mainFeM0otkpy'); div.parentNode.insertBefore(sc, div); } reloadFeM0otkpy();</script>
 
-@*<td>
-        @Html.DisplayFor(modelItem => item.YearOfManufactire)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ForAge)
-    </td>*@
-
-@*@Html.ActionLink("Edit", "Edit", new { id = item.ToyID }) |
-    @Html.ActionLink("Details", "Details", new { id = item.ToyID }) |
-    @Html.ActionLink("Delete", "Delete", new { id = item.ToyID })*@

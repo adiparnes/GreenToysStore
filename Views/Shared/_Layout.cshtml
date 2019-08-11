@@ -9,8 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body style="background-image:url(Content/Images/8.jpg)">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#a5f4df">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,9 +19,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Welcome to Green toys", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li>@Html.ActionLink("Rental Status", "Index", "ToyRent")</li>
                     @if (User.IsInRole(StatisDetails.AdminUserRole))
                     {
@@ -30,6 +32,7 @@
 
                 </ul>
                 @Html.Partial("_LoginPartial")
+               
             </div>
         </div>
     </div>
@@ -39,9 +42,9 @@
 
     </div>
     <footer class="footer">
-        <div class="container">
-            <p class="text-muted">Place your footer here</p>
-        </div>
+        @Html.ActionLink("About us", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Contact us", "Contact", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FGreenToys-102397254456122%2F%3F__tn__%3D%252Cd%252CP-R%26eid%3DARB_YfCmPFn6sL-DZUEOEoW-aNK9l6xmigo1m5z54J1fc26_HG2cS0lzbLKXBO249sl4BqTrY-v3Oq3J&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

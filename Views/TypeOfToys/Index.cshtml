@@ -8,9 +8,10 @@
 @{ 
     ApplicationDbContext db = new ApplicationDbContext();
     var toys = db.Toys.ToList();
-    
+   // var toyInDb = db.Toys.GroupBy(t => t.TypeOfToyID).ToList();
 }
-<h2>Our Type of toys</h2>
+<h2 style="font-family:cursive;text-transform:capitalize;">Our Type of toys</h2>
+
 
 <p>
 
@@ -29,7 +30,7 @@
         <th>
             @Html.DisplayNameFor(m => m.Name)
         </th>
-        <th>Quantity</th> 
+        <th>Aviability Quantity</th> 
         <th></th>
         <th></th><!--to extend the line above the three buttons (edit,detail...)-->
     </tr>
@@ -38,7 +39,7 @@
     {
         int sum = 0;
         <tr>
-            <td><!--this DisplayFor will display the actual value-->
+            <td><!--groupig by name of toy and count the aviability of all the toys from this type of toy-->
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
 
@@ -51,6 +52,7 @@
                         sum += toy.Avaibility;
                     }
                 }
+                              
                 @*@Html.Label("Quantity")*@
                 @Html.DisplayFor(m=>sum)
             </td>
@@ -62,7 +64,30 @@
     }
 
 </table>
+<h5 style="font-family:cursive;text-transform:capitalize;">how many toys from all the types of toys are exist:</h5>
+@{
+    //var toys = db.Toys.ToList();
+    var toyInDb = db.Toys.GroupBy(t => t.TypeOfToyID);
+    foreach (var t in toyInDb)
+    {
 
+        <span>@t.Count()</span>
+    }
+
+}
+<span><b>total:&nbsp;@db.Toys.Count()</b></span>
     @*@Html.ActionLink("Edit", "Edit", new { id = item.TypeOfToyID }) |
         @Html.ActionLink("Details", "Details", new { id = item.TypeOfToyID }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.TypeOfToyID })*@
+
+
+@*@{
+    //var toys = db.Toys.ToList();
+    var toyInDb = db.Toys.GroupBy(t => t.TypeOfToyID);
+    foreach (var t in toyInDb)
+    {
+
+    }
+
+}
+<span><b>total:&nbsp;@db.Toys.Count()</b></span>*@

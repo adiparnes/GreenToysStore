@@ -23,13 +23,17 @@ namespace GreenToys.Controllers
         }
 
         // GET: UserViewModels
-        public ActionResult Index()
+        public ActionResult Index(string name=null)
         {
 
             var users = from u in db.Users
                         join m in db.MembershipTypes
                         on u.MembershipTypeID equals m.MembershipTypeID
                         select u;
+            if (!String.IsNullOrEmpty(name))
+            {
+               users = users.Where(t => t.Email.Contains(name));
+            }
             List<UserViewModel> uvm = new List<UserViewModel>();
             List<MembershipType> mem = db.MembershipTypes.ToList();
             foreach (var u in users)
@@ -48,8 +52,6 @@ namespace GreenToys.Controllers
                     //MembershipTypes = (ICollection<MembershipType>)db.MembershipTypes.ToList(),
                 });
             }
-    
-      
             return View(uvm);
         }
 

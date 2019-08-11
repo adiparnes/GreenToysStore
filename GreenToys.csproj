@@ -538,6 +538,7 @@
     <Content Include="Views\ToyRent\Decline.cshtml" />
     <Content Include="Views\ToyRent\Approve.cshtml" />
     <Content Include="Views\ToyRent\Delete.cshtml" />
+    <Content Include="Views\Toys\Statistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

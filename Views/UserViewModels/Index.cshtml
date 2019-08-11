@@ -4,8 +4,21 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Manage User</h2>
+<h2 style="font-family:cursive;text-transform:capitalize;">Manage User</h2>
 <br/>
+<div style="float:left;">
+    <form method="get" action="/UserViewModels/Index">
+        <b>Search by email of customer:</b><br />
+        <p>
+            <input type="text" value="" name="name" placeholder="Filter By email" autocomplete="off" />
+            <input type="submit" value="search" class="btn btn-xs btn-primary" />
+        </p>
+
+    </form>
+</div>
+<br />
+
+
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>
