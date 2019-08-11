@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GreenToys.Models;
+using GreenToys.Utility;
 
 namespace GreenToys.Controllers
 {
+    [Authorize(Roles = StatisDetails.AdminUserRole)]
     public class TypeOfToysController : Controller
     {
         private ApplicationDbContext db;

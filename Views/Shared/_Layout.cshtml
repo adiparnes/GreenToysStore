@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using GreenToys.Utility
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,8 +22,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Rental Status","Index","ToyRent")</li>
-                  @Html.Partial("_AdminMenuPartial")
+                    <li>@Html.ActionLink("Rental Status", "Index", "ToyRent")</li>
+                    @if (User.IsInRole(StatisDetails.AdminUserRole))
+                    {
+                        @Html.Partial("_AdminMenuPartial")
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -44,4 +49,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-

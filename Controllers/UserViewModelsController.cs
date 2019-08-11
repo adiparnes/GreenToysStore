@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using GreenToys.Models;
 using GreenToys.ViewModel;
-
+using GreenToys.Utility;
 
 namespace GreenToys.Controllers
 {
+    [Authorize(Roles = StatisDetails.AdminUserRole)]
     public class UserViewModelsController : Controller
     {
         private ApplicationDbContext db;// = new ApplicationDbContext();

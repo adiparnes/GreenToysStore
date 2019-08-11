@@ -8,9 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using GreenToys.Models;
 using GreenToys.ViewModel;
+using GreenToys.Utility;
 
 namespace GreenToys.Controllers
 {
+    // [Authorize] only login requested
+    //[Authorize(Roles=StatisDetails.AdminUserRole)] only admin can get there
+    [Authorize(Roles=StatisDetails.AdminUserRole)]
     public class ToysController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

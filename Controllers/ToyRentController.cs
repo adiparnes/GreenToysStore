@@ -12,6 +12,7 @@ using System.Net;
 
 namespace GreenToys.Controllers
 {
+    [Authorize]
     public class ToyRentController : Controller
     {
 
