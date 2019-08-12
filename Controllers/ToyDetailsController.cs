@@ -13,7 +13,11 @@ namespace GreenToys.Controllers
 {
     public class ToyDetailsController : Controller
     {
-
+        private static int animaldollsconter = 0;
+        private static int barbie = 0;
+        private static int lego = 0;
+        private static int puzzle = 0;
+        private static int musialinstrument = 0;
         private ApplicationDbContext db;
         public ToyDetailsController()
         {
@@ -21,13 +25,51 @@ namespace GreenToys.Controllers
         }
 
         // GET: ToyDetails
-        public ActionResult Index(int id)
+        public ActionResult Index(int id,int? suggest)
         {
+
             var userid = User.Identity.GetUserId();
             var user = db.Users.FirstOrDefault(u=>u.Id==userid);
             
             //TypeOfToyid????
             var toyModel = db.Toys.Include(b => b.TypeOfToy).SingleOrDefault(b => b.ToyID == id);
+            var ourToy = db.Toys.Where(t => t.ToyID == id);
+            ViewBag.Toys = db.Toys.Where(t => t.TypeOfToyID == toyModel.TypeOfToyID).Except(ourToy).ToList();
+            int type = toyModel.TypeOfToyID;
+            if (type == 16)
+            {
+                animaldollsconter++;
+                ViewBag.Count = animaldollsconter;
+            }
+            else if (type == 15)
+            {
+                musialinstrument++;
+                ViewBag.Count = musialinstrument;
+            }
+            else if (type == 14)
+            {
+                puzzle++;
+                ViewBag.Count = puzzle;
+            }
+            else if (type == 13)
+            {
+                barbie++;
+                ViewBag.Count = barbie;
+            }
+            else if (type == 12)
+            {
+                lego++;
+                ViewBag.Count = lego;
+            }
+
+            if (suggest == null)
+            {
+                ViewBag.Suggest = 0;
+            }
+            else
+            {
+                ViewBag.Suggest = 1;
+            }
 
             var rentalPrice = 0.0;
             var oneMonthRental = 0.0;

@@ -4,8 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ApplicationDbContext db = new ApplicationDbContext();
 }
-<h3 style="text-shadow:2px 2px #b582ff">What ages are most likely to use are toys?</h3>
-<hr />
+<header>
+    <h3 style="text-shadow:2px 2px #b582ff">What ages are most likely to use are toys?</h3>
+</header><hr />
 <p><b>Histogram presention of how many toys types per age in our store</b></p>
 <head>
     <title>GreenToys - Stats</title>
@@ -211,12 +212,13 @@
     @{
         int[] AvailabilityArr =
         {
-            db.Toys.Count(t => t.ForAge <= 1),
-            db.Toys.Count(t => t.ForAge <=3 ),
-            db.Toys.Count(t => t.ForAge <=4 ),
-            db.Toys.Count(t => t.ForAge <=12 ),
-            db.Toys.Count(t => t.ForAge <=40 ),
-            db.Toys.Count(t => t.ForAge <=99 ),
+
+            db.Toys.Count(t => t.ForAge >= 2),
+            db.Toys.Count(t => t.ForAge >=3),
+            db.Toys.Count(t => t.ForAge >=4 ),
+            db.Toys.Count(t => t.ForAge>=7 ),
+            db.Toys.Count(t => t.ForAge >=9 ),
+            db.Toys.Count(t => t.ForAge>= 15),
 
         };
     }
@@ -232,12 +234,12 @@
     ];
 
   var freqData=[
-      { State: '0-1', freq: { low: 0, mid: 0, high: JSAvailabilityArr[0]}}
+      { State: '0-2', freq: { low: 0, mid: 0, high: JSAvailabilityArr[0]}}
       , { State: '0-3', freq: { low: 0, mid: 0, high: JSAvailabilityArr[1]}}
       , { State: '0-4', freq: { low: 0, mid: 0, high: JSAvailabilityArr[2]}}
-      , { State: '0-12', freq: { low: 0, mid: 0, high: JSAvailabilityArr[3]}}
-      , { State: '0-40', freq: { low: 0, mid: 0, high: JSAvailabilityArr[4]}}
-      , { State: '0-99', freq: { low: 0, mid: 0, high: JSAvailabilityArr[5]}}
+      , { State: '0-7', freq: { low: 0, mid: 0, high: JSAvailabilityArr[3]}}
+      , { State: '0-9', freq: { low: 0, mid: 0, high: JSAvailabilityArr[4]}}
+      , { State: '0-15', freq: { low: 0, mid: 0, high: JSAvailabilityArr[5]}}
 ];
 dashboard('#dashboard',freqData);
     </script>

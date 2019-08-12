@@ -63,7 +63,7 @@ namespace GreenToys.Controllers
 
                 //List<UserViewModel> users = new List<UserViewModel>();
                 //List<MembershipType> member = new List<MembershipType>();
-             
+
 
 
                 var chargeRate = from u in db.Users
@@ -81,7 +81,7 @@ namespace GreenToys.Controllers
                     ToyID = toySelected.ToyID,
                     ToyPrice = rentalPrice,
                     ScheduledOfRentalDate = toyRent.ScheduledOfRentalDate,
-                    RentalDuration=rentalDuration,
+                    RentalDuration = rentalDuration,
                     Status = ToyRent.StatusEnum.Approved,
                     UserId = userDetails.ToList()[0].Id
 
@@ -102,7 +102,7 @@ namespace GreenToys.Controllers
 
 
         // GET: ToyRent
-        public ActionResult Index(int? pageNumber,string option=null,string search=null)
+        public ActionResult Index(int? pageNumber, string option = null, string search = null)
         {
             string userId = User.Identity.GetUserId();
 
@@ -142,7 +142,7 @@ namespace GreenToys.Controllers
             }
             if (option == "name" && search.Length > 0)
             {
-                model = model.Where(u => u.FirstName.Contains(search)||u.LastName.Contains(search));
+                model = model.Where(u => u.FirstName.Contains(search) || u.LastName.Contains(search));
             }
             if (option == "status" && search.Length > 0)
             {
@@ -157,7 +157,7 @@ namespace GreenToys.Controllers
             }
 
             //each page 5 rows-----------------------
-            return View(model.ToList().ToPagedList(pageNumber?? 1,5));
+            return View(model.ToList().ToPagedList(pageNumber ?? 1, 5));
         }
 
 
@@ -167,7 +167,7 @@ namespace GreenToys.Controllers
             var userId = User.Identity.GetUserId();
             Toy toyToRent = db.Toys.Find(toy.ToyID);
             //double rentalPr = 0;
-            double rentalPrice=0;
+            double rentalPrice = 0;
             if (userId != null)
             {
 
@@ -186,11 +186,11 @@ namespace GreenToys.Controllers
             }
             ToyRent toyRent = new ToyRent
             {
-                ToyID=toyToRent.ToyID,
-                UserId=userId,
-                RentalDuration=toy.RentalDuration,
-                ToyPrice= rentalPrice,
-                Status=ToyRent.StatusEnum.Requested
+                ToyID = toyToRent.ToyID,
+                UserId = userId,
+                RentalDuration = toy.RentalDuration,
+                ToyPrice = rentalPrice,
+                Status = ToyRent.StatusEnum.Requested
             };
 
             db.ToyRents.Add(toyRent);
@@ -199,7 +199,7 @@ namespace GreenToys.Controllers
             toyInDb.Avaibility -= 1;
             db.SaveChanges();
             return RedirectToAction("Index", "ToyRent");
-            
+
         }
 
         public ActionResult Details(int? id)
@@ -216,7 +216,7 @@ namespace GreenToys.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             return View(model);
         }
 
@@ -435,7 +435,7 @@ namespace GreenToys.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Decline(int id)//ToyRentalViewModel model
         {
-            
+
             if (id == 0)//ToyID??
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -458,31 +458,31 @@ namespace GreenToys.Controllers
             Toy toySelected = db.Toys.Where(t => t.ToyID == toyRent.ToyID).FirstOrDefault();
             var userDetails = from u in db.Users
                               where u.Id.Equals(toyRent.UserId)
-                              select new { u.Id,u.FirstName,u.LastName,u.BirthDate,u.Email};
+                              select new { u.Id, u.FirstName, u.LastName, u.BirthDate, u.Email };
             ToyRentalViewModel model = new ToyRentalViewModel
             {
-                ToyRentID=toyRent.ToyRentID,
-                ToyID=toyRent.ToyID,
-                ToyPrice=toyRent.ToyPrice,
+                ToyRentID = toyRent.ToyRentID,
+                ToyID = toyRent.ToyID,
+                ToyPrice = toyRent.ToyPrice,
                 Price = toySelected.Price,
                 FirstName = userDetails.ToList()[0].FirstName,
                 LastName = userDetails.ToList()[0].LastName,
                 BirthDate = userDetails.ToList()[0].BirthDate,
                 Email = userDetails.ToList()[0].Email,
                 UserId = userDetails.ToList()[0].Id,
-                ScheduledOfRentalDate=toyRent.ScheduledOfRentalDate,
-                StartOfRentalDate=toyRent.StartOfRentalDate,
-                Avaibility= toySelected.Avaibility,
-                YearOfManufactire= toySelected.YearOfManufactire,
-                ToyDescription= toySelected.ToyDescription,
-                TypeOfToyID= toySelected.TypeOfToyID,
-                TypeOfToy=db.ToysType.FirstOrDefault(t=>t.TypeOfToyID.Equals(toySelected.TypeOfToyID)),
-                ForAge= toySelected.ForAge,
-                ImageUrl= toySelected.ImageUrl,
-                RentalDuration=toyRent.RentalDuration,
-                Status=toyRent.Status.ToString(),
-                NameOfToy= toySelected.NameOfToy,
-                AdditionalCharge=toyRent.AdditionalCharge
+                ScheduledOfRentalDate = toyRent.ScheduledOfRentalDate,
+                StartOfRentalDate = toyRent.StartOfRentalDate,
+                Avaibility = toySelected.Avaibility,
+                YearOfManufactire = toySelected.YearOfManufactire,
+                ToyDescription = toySelected.ToyDescription,
+                TypeOfToyID = toySelected.TypeOfToyID,
+                TypeOfToy = db.ToysType.FirstOrDefault(t => t.TypeOfToyID.Equals(toySelected.TypeOfToyID)),
+                ForAge = toySelected.ForAge,
+                ImageUrl = toySelected.ImageUrl,
+                RentalDuration = toyRent.RentalDuration,
+                Status = toyRent.Status.ToString(),
+                NameOfToy = toySelected.NameOfToy,
+                AdditionalCharge = toyRent.AdditionalCharge
             };
             return model;
         }
@@ -491,7 +491,34 @@ namespace GreenToys.Controllers
 
 
 
+        //public ActionResult Favorite(string name=null)
+        //{
+        //    var fav = db.Toys.OrderBy(t => t.NameOfToy).ToList();
+        //    int find = 0;
+        //    int sum = 0;
+        //    String favName;
+        //    foreach (var t in fav)
+        //    {
 
+        //        foreach (var f in fav)
+        //        {
+        //            if (f.NameOfToy == t.NameOfToy)
+        //            {
+        //                sum++;
+        //            }
+        //        }
+        //        if (sum > find)
+        //        {
+        //            favName = t.NameOfToy;
+        //            find = sum;
+        //            sum = 0;
+        //        }
+
+        //        sum = 0;
+        //    }
+        //    //var final = db.Toys.Where(t => t.NameOfToy.Equals(favName));
+        //    return View(favName.ToDictionary().);
+        //}
 
 
 

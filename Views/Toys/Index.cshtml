@@ -28,6 +28,8 @@
 <br />
 <br />
 
+
+
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>
@@ -36,10 +38,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
-        <th>
-            <!--toput in the details only?-->
+        @*<th>
+            toput in the details only?
             @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Avaibility)
         </th>
@@ -57,9 +59,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Avaibility)
             </td>
